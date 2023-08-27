@@ -103,7 +103,7 @@ class DataTransformation:
             ordinal_encod=['Outlet_Location_Type','Outlet_Type','Item_Fat_Content','Outlet_Identifier']
             numerical_column=['Item_Visibility','Item_MRP','Outlet_Establishment_Year']
             
-
+            #item_type = ['']
             # numerical pipeline
 
             numerical_pipeline=Pipeline(steps=[

@@ -8,15 +8,18 @@ from src.components.data_transformation import DataTransformationConfig
 from src.config.configuration import *
 from src.pipeline.training_pipeline import Train
 from werkzeug.utils import secure_filename
+import base64
 
 feature_engineering_file_path = FEATURE_ENG_OBJ_PATH
 transformer_file_path = PREPROCESSING_OBJ_PATH
 model_file_path = MODEL_FILE_PATH
 
 UPLOAD_FOLDER = 'batch_prediction/Uploaded_CSV_FILE'
+#predicted_file_path = 'batch_prediction/Predicted_CSV_FILE/predicted_results.csv'
+
 
 # Set the title of the Streamlit app
-st.title("Sales Prediction App")
+st.title("Store Sales Prediction App")
 
 ALLOWED_EXTENSIONS = {'csv'}
 
@@ -82,9 +85,27 @@ elif selected_page == "Batch Prediction":
         batch = BatchPrediction(file_path, model_file_path, transformer_file_path, feature_engineering_file_path)
         batch.start_batch_prediction()
 
+        # Define the function to create a download link
+        def get_binary_file_downloader_html(file_path):
+            with open(file_path, 'rb') as file:
+                contents = file.read()
+            encoded_file = base64.b64encode(contents).decode()
+            return f'<a href="data:file/csv;base64,{encoded_file}" download="predicted_results.csv">Download Predicted File</a>'
+
+
+        # Define a variable to store the path to the predicted file after batch prediction
+        predicted_file_path = 'batch_prediction/Prediction_CSV/prediction.csv'
+
+
+        # After batch prediction and displaying the success message, add a download button for the predicted file
         output = "Batch Prediction Done"
         st.success(output)
 
+        # Add a download button for the predicted file
+        if st.button("Download Predicted File"):
+            st.markdown(get_binary_file_downloader_html(predicted_file_path), unsafe_allow_html=True)
+
+# ... The rest of your code ...
 elif selected_page == "Train":
     st.header("Model Training")
 

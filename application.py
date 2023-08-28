@@ -85,25 +85,25 @@ elif selected_page == "Batch Prediction":
         batch = BatchPrediction(file_path, model_file_path, transformer_file_path, feature_engineering_file_path)
         batch.start_batch_prediction()
 
-        # Define the function to create a download link
-        def get_binary_file_downloader_html(file_path):
-            with open(file_path, 'rb') as file:
-                contents = file.read()
-            encoded_file = base64.b64encode(contents).decode()
-            return f'<a href="data:file/csv;base64,{encoded_file}" download="predicted_results.csv">Download Predicted File</a>'
+        # # Define the function to create a download link
+        # def get_binary_file_downloader_html(file_path):
+        #     with open(file_path, 'rb') as file:
+        #         contents = file.read()
+        #     encoded_file = base64.b64encode(contents).decode()
+        #     return f'<a href="data:file/csv;base64,{encoded_file}" download="predicted_results.csv">Download Predicted File</a>'
 
 
-        # Define a variable to store the path to the predicted file after batch prediction
-        predicted_file_path = 'batch_prediction/Prediction_CSV/prediction.csv'
+        # # Define a variable to store the path to the predicted file after batch prediction
+        # predicted_file_path = 'batch_prediction/Prediction_CSV/prediction.csv'
 
 
         # After batch prediction and displaying the success message, add a download button for the predicted file
         output = "Batch Prediction Done"
         st.success(output)
 
-        # Add a download button for the predicted file
-        if st.button("Download Predicted File"):
-            st.markdown(get_binary_file_downloader_html(predicted_file_path), unsafe_allow_html=True)
+        # # Add a download button for the predicted file
+        # if st.button("Download Predicted File"):
+        #     st.markdown(get_binary_file_downloader_html(predicted_file_path), unsafe_allow_html=True)
 
 # ... The rest of your code ...
 elif selected_page == "Train":

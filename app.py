@@ -5,7 +5,7 @@ from flask import Flask, request, render_template, jsonify
 from src.pipeline.prediction_pipeline import CustomData, PredictPipeline
 import os
 from werkzeug.utils import secure_filename
-
+from flask import send_file
 from Prediction.batch import BatchPrediction
 from src.logger import logging
 from src.components.data_transformation import DataTransformationConfig
@@ -120,4 +120,4 @@ def train():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=True, port ='8888')
+    app.run(host='0.0.0.0', port ='8888',debug=True)
